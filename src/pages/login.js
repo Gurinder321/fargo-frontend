@@ -23,7 +23,7 @@ const Login = () => {
 
   return (
     <div className="container flex mx-auto max-w-screen-md items-center h-screen">
-      <h1>Login</h1>
+      <h1>Login Page</h1>
     </div>
   );
 };
