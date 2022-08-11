@@ -12,7 +12,6 @@ const SignUp = () => {
 
   const [username, setUsername] = useState('');
   const [fullName, setFullName] = useState('');
-
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,24 +22,32 @@ const SignUp = () => {
     event.preventDefault();
 
     const usernameExists = await doesUsernameExist(username);
-    if (usernameExists.length) {
+    if (!usernameExists) {
       try {
         const createdUserResult = await firebase
           .auth()
           .createUserWithEmailAndPassword(emailAddress, password);
 
+        // authentication
+        // -> emailAddress & password & username (displayName)
         await createdUserResult.user.updateProfile({
           displayName: username,
         });
 
-        await firebase.firestore().collection('users').add({
-          userId: createdUserResult.user.uid,
-          username: username.toLowerCase(),
-          fullName,
-          emailAddress: emailAddress.toLowerCase(),
-          following: [],
-          dateCreated: Date.now(),
-        });
+        // firebase user collection (create a document)
+        await firebase
+          .firestore()
+          .collection('users')
+          .add({
+            userId: createdUserResult.user.uid,
+            username: username.toLowerCase(),
+            fullName,
+            emailAddress: emailAddress.toLowerCase(),
+            following: ['2'],
+            followers: [],
+            dateCreated: Date.now(),
+          });
+
         navigate('/');
       } catch (error) {
         setFullName('');
@@ -49,7 +56,8 @@ const SignUp = () => {
         setError(error.message);
       }
     } else {
-      setError('That username is taken.');
+      setUsername('');
+      setError('That username is already taken, please try another.');
     }
   };
 
