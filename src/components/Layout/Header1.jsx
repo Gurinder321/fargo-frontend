@@ -32,20 +32,25 @@ const Header1 = () => {
           </ul>
         </div>
         <div className="hidden md:flex pr-4">
-          <button
-            //   FIXME: background color not working
+          <Link to={ROUTES.LOGIN}>
+            <button
+              //   FIXME: background color not working
 
-            className="px-6 py-2 text-white border bg-transparent  border-indigo-600
+              className="px-6 py-2 text-white border bg-transparent  border-indigo-600
     hover:bg-transparent hover:text-purple-600 rounded-md mr-4"
-          >
-            <Link to={ROUTES.LOGIN}>Login</Link>
-          </button>
-          <button
-            className="px-6 py-1 text-white border bg-[#28a745] border-[#28a745]
+            >
+              Login
+            </button>
+          </Link>
+          <Link to={ROUTES.SIGN_UP}>
+            {' '}
+            <button
+              className="px-6 py-2 text-white border bg-[#28a745] border-[#28a745]
     hover:bg-transparent hover:text-purple-600 rounded-md"
-          >
-            <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-          </button>
+            >
+              Sign Up
+            </button>
+          </Link>
         </div>
         <div className="md:hidden mr-4" onClick={handleClick}>
           {!nav ? (
