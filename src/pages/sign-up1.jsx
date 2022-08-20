@@ -9,7 +9,7 @@ import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import * as ROUTES from '../constants/routes';
 import Footer from '../components/Layout/footer';
 
-const SignUp = () => {
+const SignUp1 = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -38,7 +38,7 @@ const SignUp = () => {
       delete formDataCopy.password;
       formDataCopy.timestamp = serverTimestamp();
       await setDoc(doc(db, 'users', user.uid), formDataCopy);
-      navigate('/register-steps');
+      navigate('/');
       alert('Signup Success');
     } catch (error) {
       console.log(error);
@@ -137,4 +137,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUp1;

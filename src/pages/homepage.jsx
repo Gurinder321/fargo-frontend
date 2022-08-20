@@ -1,24 +1,22 @@
-import React, { useEffect } from 'react';
-import Header from '../components/Layout/header';
-import Timeline from '../components/timeline';
-import Sidebar from '../components/sidebar';
-import Layout from './../components/Layout/layout';
+import React from 'react';
+import Layout from '../components/Layout/Layout';
+import Hero from '../components/Homepage/Hero';
+import About from '../components/Homepage/About';
+import Support from '../components/Homepage/Support';
+import AllInOne from '../components/Homepage/AllInOne';
+import GetStarted from '../components/Homepage/GetStarted';
 
 const Homepage = () => {
-  useEffect(() => {
-    document.title = 'Instagram';
-  }, []);
-
   return (
-    <Layout>
-      <div className="bg=gray-background">
-        <div className="grid">
-          <p>This is a test</p>
-          <Timeline />
-          <Sidebar />
-        </div>
-      </div>
-    </Layout>
+    <>
+      <Layout>
+        <Hero />
+        <About />
+        <Support />
+        <AllInOne />
+        <GetStarted />
+      </Layout>
+    </>
   );
 };
 
