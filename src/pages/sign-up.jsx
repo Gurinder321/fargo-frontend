@@ -8,6 +8,7 @@ import { db } from '../lib/firebase';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import * as ROUTES from '../constants/routes';
 import Footer from '../components/Layout/footer';
+import { createUser } from '../services/RegisterService'
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,16 +31,19 @@ const SignUp = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      const auth = getAuth();
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      updateProfile(auth.currentUser, { displayName: name });
-      const formDataCopy = { ...formData };
-      delete formDataCopy.password;
-      formDataCopy.timestamp = serverTimestamp();
-      await setDoc(doc(db, 'users', user.uid), formDataCopy);
-      navigate('/register-steps');
-      alert('Signup Success');
+      // const auth = getAuth();
+      // const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // const user = userCredential.user;
+      // updateProfile(auth.currentUser, { displayName: name });
+      // const formDataCopy = { ...formData };
+      // delete formDataCopy.password;
+      // formDataCopy.timestamp = serverTimestamp();
+      // await setDoc(doc(db, 'users', user.uid), formDataCopy);
+      // navigate('/register-steps');
+      // alert('Signup Success');
+      const data = { ...formData };
+      data.username = data.name;
+      createUser(data)
     } catch (error) {
       console.log(error);
     }
