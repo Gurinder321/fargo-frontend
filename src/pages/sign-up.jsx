@@ -8,7 +8,7 @@ import { db } from '../lib/firebase';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import * as ROUTES from '../constants/routes';
 import Footer from '../components/Layout/footer';
-import { createUser } from '../services/RegisterService'
+import { createUser } from '../services/RegisterService';
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +43,11 @@ const SignUp = () => {
       // alert('Signup Success');
       const data = { ...formData };
       data.username = data.name;
-      createUser(data)
+      let registeredUser = await createUser(data);
+      sessionStorage.setItem('token', registeredUser.data.token);
+      sessionStorage.setItem('_id', registeredUser.data._id);
+      navigate('/signup1');
+      alert('Signup Success');
     } catch (error) {
       console.log(error);
     }
